@@ -9,15 +9,6 @@ class Quest extends StatefulWidget {
 }
 
 class _QuestState extends State<Quest> {
-  int index = 0;
-  int questno = 0;
-
-  void nxtQuestion() {
-      if (questno < questions.length) {                            // here questions is the list name
-        index = index + 1;
-        setState(() {});
-      }
-  }
 
   List questions = [
     Quiz(quest: 'anyone have nothing', answer: false),
@@ -31,6 +22,14 @@ class _QuestState extends State<Quest> {
     Quiz(quest: 'this is nothng but different', answer: true),
     Quiz(quest: 'this is different', answer: false),
   ];
+  int questno = 0;
+
+  void nxtQuestion() {
+    if (questno < questions.length) {                            // here questions is the list name
+
+      setState(() { questno = questno + 1;});
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +43,7 @@ class _QuestState extends State<Quest> {
               width: 1000,
               height: 150,
               child: Text(
-                questions[3].quest,
+                questions[questno].quest,
               ),
               decoration: BoxDecoration(
                 color: Colors.blue,
