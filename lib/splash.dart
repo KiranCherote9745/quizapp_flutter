@@ -17,7 +17,7 @@ class _SplashState extends State<Splash> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Timer(Duration(seconds:1), ()  {
+    Timer(Duration(seconds:2), ()  {
       Navigator.push(context, MaterialPageRoute(builder: (context) =>Quest() ));
     });
 
@@ -26,7 +26,7 @@ class _SplashState extends State<Splash> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue,
+      backgroundColor: Colors.lightGreenAccent,
       appBar: AppBar(
         backgroundColor: Colors.deepPurple,
         title: Text('Quiz App'),

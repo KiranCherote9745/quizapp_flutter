@@ -23,18 +23,33 @@ class _QuestState extends State<Quest> {
     Quiz(quest: 'this is different', answer: false),
   ];
   int questno = 0;
-
+  String result='';
+  // increment funtion
   void nxtQuestion() {
     if (questno < questions.length) {                            // here questions is the list name
 
-      setState(() { questno = questno + 1;});
+      setState(() {
+        questno = questno + 1;
+      });
+
     }
+  }
+
+  // second function
+  void option(bool answer){
+    if(questions[questno].answer==answer) {
+      result = 'correct';
+    }
+      else{
+        result='false';
+      }
+    print(answer);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.deepPurple,
+      backgroundColor: Colors.blue,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -44,11 +59,16 @@ class _QuestState extends State<Quest> {
               height: 150,
               child: Text(
                 questions[questno].quest,
+                textAlign:TextAlign.center,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 60,
+                ),
               ),
               decoration: BoxDecoration(
-                color: Colors.blue,
+                color: Colors.lightGreenAccent,
                 borderRadius:
-                    BorderRadius.horizontal(right: Radius.circular(50)),
+                    BorderRadius.horizontal(right: Radius.circular(20),left:Radius.circular(10)),
                 border: Border.all(),
                 boxShadow: [
                   BoxShadow(
@@ -60,36 +80,74 @@ class _QuestState extends State<Quest> {
                 ],
               ),
             ),
+
+            // line break
             SizedBox(
               height: 40,
             ),
+
+            // result container
+            Container(
+              // result is being called for printing
+              child: Text(result,
+
+                  style: TextStyle(
+                color: Colors.white,
+                fontSize: 60,
+              ),
+              ),
+
+            ),
+
+            SizedBox(
+              height: 40,
+            ),
+
             Container(
               child: TextButton(
                 child: Text(
-                  'Yes',
+                  'True',
                   style: TextStyle(
                     color: Colors.black,
+                    fontSize: 30,
                   ),
                 ),
-                onPressed: () => {nxtQuestion()},
+                onPressed: () {
+                  setState(() {
+                    nxtQuestion();
+                    option(true);
+                  });
+                },
                 style: TextButton.styleFrom(
                     primary: Colors.white,
                     backgroundColor: Colors.white,
                     textStyle: TextStyle(color: Colors.white)),
               ),
             ),
+
+
             SizedBox(
               height: 15,
             ),
+
+
             Container(
               child: TextButton(
                 child: Text(
-                  'No',
+                  'False',
                   style: TextStyle(
                     color: Colors.black,
+                    fontSize: 30,
                   ),
                 ),
-                onPressed: () => {nxtQuestion()},
+
+                onPressed: () {
+                  setState(() {
+                    nxtQuestion();
+                    option(false);
+                  });
+                },
+
                 style: TextButton.styleFrom(
                     primary: Colors.white,
                     backgroundColor: Colors.white,
@@ -99,12 +157,15 @@ class _QuestState extends State<Quest> {
             SizedBox(
               height: 20,
             ),
+
+
             Container(
               child: TextButton(
                 child: Text(
-                  'Close',
+                  'Reset',
                   style: TextStyle(
                     color: Colors.black,
+                    fontSize: 30,
                   ),
                 ),
                 onPressed: null,
